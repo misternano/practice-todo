@@ -1,6 +1,6 @@
 # Todo List Web App
 
-This repository contains a practice project for building a Todo List web application using Golang for the backend and TypeScript for the frontend. The application allows users to create, update, and delete tasks, as well as mark them as complete.
+This repository contains a practice project for building a Todo List web application using Go for the backend and TypeScript for the frontend. The application allows users to create and complete tasks.
 
 ## Project Structure
 
