@@ -47,14 +47,14 @@ const AddTodo = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
 						{...form.getInputProps("body")}
 					/>
 
-					<button className="w-full p-1 px-2 bg-blue-500 hover:bg-blue-600 rounded text-white" type="submit">
+					<button className="w-full p-1 px-2 bg-indigo-500 hover:bg-indigo-600 rounded text-white" type="submit">
 						Create Todo
 					</button>
 				</form>
 			</Modal>
 
 			<Group position="center">
-				<button onClick={() => setOpen(true)} className="p-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-md">
+				<button onClick={() => setOpen(true)} className="p-2 px-4 bg-indigo-500 hover:bg-indigo-600 rounded-md">
 					Add Todo
 				</button>
 			</Group>
