@@ -42,7 +42,7 @@ const App = () => {
 		<>
 			<h1 className="my-4 text-center text-3xl font-bold">Todo</h1>
 			<div className="max-w-[50vw] mx-auto my-4 grid place-content-center">
-				<ul className={`${data && data.length < 4 ? "flex flex-col" : "grid grid-cols-2"} gap-4`}>
+				<ul className={`${data && data.length > 4 ? "grid grid-cols-2" : "flex flex-col"} gap-4`}>
 					<Modal opened={showModal} onClose={() => setShowModal(false)} title="Delete Confirmation">
 						<p className="text-center">This cannot be undone!</p>
 						<div className="flex flex-row gap-2 justify-center">
