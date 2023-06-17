@@ -11,23 +11,23 @@ const AddTodo = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
 	const form = useForm({
 		initialValues: {
 			title: "",
-			body: "",
+			body: ""
 		}
-	})
+	});
 
 	const createTodo = async (values: { title: string, body: string }) => {
 		const updated = await fetch(`${ENDPOINT}/api/todos`, {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+				"Content-Type": "application/json"
 			},
-			body: JSON.stringify(values),
+			body: JSON.stringify(values)
 		}).then((r) => r.json());
 
-		mutate(updated);
+		await mutate(updated);
 		form.reset();
 		setOpen(false);
-	}
+	};
 
 	return (
 		<>
@@ -35,30 +35,31 @@ const AddTodo = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
 				<form onSubmit={form.onSubmit(createTodo)}>
 					<TextInput
 						required
-						mb={12}
-						label="Todo"
+						mb={16}
+						label="Title"
 						placeholder="What do you want to do?"
 						{...form.getInputProps("title")}
 					/>
 					<Textarea
-						required
-						mb={12}
+						mb={16}
 						label="Body"
 						placeholder="Tell me more..."
 						{...form.getInputProps("body")}
 					/>
 
-					<button type="submit">Create Todo</button>
+					<button className="w-full p-1 px-2 bg-blue-500 hover:bg-blue-600 rounded text-white" type="submit">
+						Create Todo
+					</button>
 				</form>
 			</Modal>
 
 			<Group position="center">
 				<button onClick={() => setOpen(true)} className="p-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-md">
-					ADD TODO
+					Add Todo
 				</button>
 			</Group>
 		</>
-	)
-}
+	);
+};
 
 export default AddTodo;
