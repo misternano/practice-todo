@@ -5,7 +5,7 @@ import { ENDPOINT } from "../App";
 import { Modal, Group, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-const AddTodo = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
+const AddTask = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	const form = useForm({
@@ -31,10 +31,11 @@ const AddTodo = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
 
 	return (
 		<>
-			<Modal opened={open} onClose={() => setOpen(false)} title="Create Todo">
+			<Modal opened={open} onClose={() => setOpen(false)} title="Create Task">
 				<form onSubmit={form.onSubmit(createTodo)}>
 					<TextInput
 						required
+						data-autofocus
 						mb={16}
 						label="Title"
 						placeholder="What do you want to do?"
@@ -46,20 +47,18 @@ const AddTodo = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
 						placeholder="Tell me more..."
 						{...form.getInputProps("body")}
 					/>
-
 					<button className="w-full p-1 px-2 bg-indigo-500 hover:bg-indigo-600 rounded text-white" type="submit">
-						Create Todo
+						Create Task
 					</button>
 				</form>
 			</Modal>
-
 			<Group position="center">
 				<button onClick={() => setOpen(true)} className="p-2 px-4 bg-indigo-500 hover:bg-indigo-600 rounded-md">
-					Add Todo
+					Add Task
 				</button>
 			</Group>
 		</>
 	);
 };
 
-export default AddTodo;
+export default AddTask;
