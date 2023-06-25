@@ -26,6 +26,10 @@ type completeTodoRequest struct {
 	ID string `json:"id"`
 }
 
+type deleteTodoRequest struct {
+	ID string `json:"id"`
+}
+
 type editTodoRequest struct {
 	ID          string `json:"id"`
 	Title       string `json:"title"`
@@ -105,7 +109,7 @@ func (t *TodoController) edit(c *fiber.Ctx) error {
 }
 
 func (t *TodoController) delete(c *fiber.Ctx) error {
-	var req completeTodoRequest
+	var req deleteTodoRequest
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "Invalid request body",
