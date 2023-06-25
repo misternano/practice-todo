@@ -94,3 +94,19 @@ func (s *TodoStorage) editTodo(id, title, description string, completed bool, ct
 
 	return nil
 }
+
+func (s *TodoStorage) delete(id string, ctx context.Context) error {
+	collection := s.db.Collection("todos")
+
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return err
+	}
+
+	_, err = collection.DeleteOne(ctx, bson.M{"_id": objectID})
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

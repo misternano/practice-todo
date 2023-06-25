@@ -103,3 +103,23 @@ func (t *TodoController) edit(c *fiber.Ctx) error {
 		"message": "Todo edited successfully",
 	})
 }
+
+func (t *TodoController) delete(c *fiber.Ctx) error {
+	var req completeTodoRequest
+	if err := c.BodyParser(&req); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Invalid request body",
+		})
+	}
+
+	err := t.storage.delete(req.ID, c.Context())
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Failed to delete todo",
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Todo deleted successfully",
+	})
+}
