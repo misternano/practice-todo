@@ -24,17 +24,6 @@ func NewTodoStorage(db *mongo.Database) *TodoStorage {
 	}
 }
 
-func (s *TodoStorage) createTodo(title, description string, completed bool, ctx context.Context) (string, error) {
-	collection := s.db.Collection("todos")
-
-	result, err := collection.InsertOne(ctx, bson.M{"title": title, "description": description, "completed": completed})
-	if err != nil {
-		return "", err
-	}
-
-	return result.InsertedID.(primitive.ObjectID).Hex(), nil
-}
-
 func (s *TodoStorage) getAllTodos(ctx context.Context) ([]todoDB, error) {
 	collection := s.db.Collection("todos")
 
@@ -49,4 +38,59 @@ func (s *TodoStorage) getAllTodos(ctx context.Context) ([]todoDB, error) {
 	}
 
 	return todos, nil
+}
+
+func (s *TodoStorage) createTodo(title string, description string, completed bool, ctx context.Context) (string, error) {
+	collection := s.db.Collection("todos")
+
+	result, err := collection.InsertOne(ctx, bson.M{
+		"title": title, "description": description, "completed": completed,
+	})
+	if err != nil {
+		return "", err
+	}
+
+	return result.InsertedID.(primitive.ObjectID).Hex(), nil
+}
+
+func (s *TodoStorage) toggleComplete(id string, ctx context.Context) error {
+	collection := s.db.Collection("todos")
+
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return err
+	}
+
+	filter := bson.M{"_id": objectID}
+	update := bson.M{"$set": bson.M{"completed": true}}
+
+	_, err = collection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *TodoStorage) editTodo(id, title, description string, completed bool, ctx context.Context) error {
+	collection := s.db.Collection("todos")
+
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return err
+	}
+
+	filter := bson.M{"_id": objectID}
+	update := bson.M{"$set": bson.M{
+		"title":       title,
+		"description": description,
+		"completed":   completed,
+	}}
+
+	_, err = collection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

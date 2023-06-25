@@ -7,4 +7,6 @@ func AddTodoRoutes(app *fiber.App, controller *TodoController) {
 
 	todos.Post("/", controller.create)
 	todos.Get("/", controller.getAll)
+	todos.Patch("/:id/complete", controller.toggleComplete)
+	todos.Patch("/:id/edit", controller.edit)
 }
