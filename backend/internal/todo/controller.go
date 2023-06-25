@@ -22,7 +22,7 @@ type createTodoResponse struct {
 	ID string `json:"id"`
 }
 
-type toggleCompleteRequest struct {
+type completeTodoRequest struct {
 	ID string `json:"id"`
 }
 
@@ -65,7 +65,7 @@ func (t *TodoController) create(c *fiber.Ctx) error {
 }
 
 func (t *TodoController) complete(c *fiber.Ctx) error {
-	var req toggleCompleteRequest
+	var req completeTodoRequest
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "Invalid request body",
