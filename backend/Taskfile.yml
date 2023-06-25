@@ -1,0 +1,15 @@
+version: "3"
+
+tasks:
+  dev:
+    cmds:
+      - air
+  build:
+    cmds:
+      - go build -o http-server cmd/http/main.go
+  start:
+    cmds:
+      - ./http-server
+  install:
+    cmds:
+      - go install github.com/go-task/task/v3/cmd/task@latest
