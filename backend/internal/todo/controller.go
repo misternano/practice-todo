@@ -18,23 +18,15 @@ type createTodoRequest struct {
 	Completed   bool   `json:"completed"`
 }
 
-type createTodoResponse struct {
-	ID string `json:"id"`
-}
-
-type completeTodoRequest struct {
-	ID string `json:"id"`
-}
-
-type deleteTodoRequest struct {
-	ID string `json:"id"`
-}
-
 type editTodoRequest struct {
 	ID          string `json:"id"`
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Completed   bool   `json:"completed"`
+}
+
+type todoRequestResponse struct {
+	ID string `json:"id"`
 }
 
 func (t *TodoController) getAll(c *fiber.Ctx) error {
@@ -63,13 +55,13 @@ func (t *TodoController) create(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.Status(fiber.StatusCreated).JSON(createTodoResponse{
+	return c.Status(fiber.StatusCreated).JSON(todoRequestResponse{
 		ID: id,
 	})
 }
 
 func (t *TodoController) complete(c *fiber.Ctx) error {
-	var req completeTodoRequest
+	var req todoRequestResponse
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "Invalid request body",
@@ -109,7 +101,7 @@ func (t *TodoController) edit(c *fiber.Ctx) error {
 }
 
 func (t *TodoController) delete(c *fiber.Ctx) error {
-	var req deleteTodoRequest
+	var req todoRequestResponse
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "Invalid request body",
