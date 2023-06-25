@@ -53,7 +53,7 @@ func (s *TodoStorage) createTodo(title string, description string, completed boo
 	return result.InsertedID.(primitive.ObjectID).Hex(), nil
 }
 
-func (s *TodoStorage) toggleComplete(id string, ctx context.Context) error {
+func (s *TodoStorage) completeTodo(id string, ctx context.Context) error {
 	collection := s.db.Collection("todos")
 
 	objectID, err := primitive.ObjectIDFromHex(id)

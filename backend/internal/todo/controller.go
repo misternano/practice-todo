@@ -64,7 +64,7 @@ func (t *TodoController) create(c *fiber.Ctx) error {
 	})
 }
 
-func (t *TodoController) toggleComplete(c *fiber.Ctx) error {
+func (t *TodoController) complete(c *fiber.Ctx) error {
 	var req toggleCompleteRequest
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -72,7 +72,7 @@ func (t *TodoController) toggleComplete(c *fiber.Ctx) error {
 		})
 	}
 
-	err := t.storage.toggleComplete(req.ID, c.Context())
+	err := t.storage.completeTodo(req.ID, c.Context())
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": "Failed to toggle todo completion",
