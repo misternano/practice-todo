@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import useSWR from "swr";
-import {AddTodo} from "./components";
-import {Todo} from "./types";
-import {CheckCircleFillIcon, CircleIcon, XIcon} from "@primer/octicons-react";
-import {Modal} from "@mantine/core";
+import { AddTodo } from "./components";
+import { Todo } from "./types";
+import { CheckCircleFillIcon, CircleIcon, XIcon } from "@primer/octicons-react";
+import { Modal } from "@mantine/core";
 
 export const ENDPOINT = "http://localhost:4000";
 

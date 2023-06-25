@@ -5,7 +5,7 @@ import { ENDPOINT } from "../App";
 import { Modal, Group, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-const AddTask = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
+const AddTodo = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	const form = useForm({
@@ -61,4 +61,4 @@ const AddTask = ({ mutate }: { mutate: KeyedMutator<Todo[]> }) => {
 	);
 };
 
-export default AddTask;
+export default AddTodo;

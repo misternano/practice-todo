@@ -1,5 +1,5 @@
-import AddTask from "./AddTask.tsx";
+import AddTodo from "./AddTodo.tsx";
 
 export {
-	AddTask
+	AddTodo
 };
